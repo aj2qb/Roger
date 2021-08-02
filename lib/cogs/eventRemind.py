@@ -2,6 +2,7 @@
 import asyncio
 import datetime 
 
+from datetime import datetime       # DON'T get rid of this import, sends user format error
 from discord import Member 
 from discord.ext.commands import Cog
 from discord.ext.commands import command
