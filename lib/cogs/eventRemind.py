@@ -3,6 +3,7 @@ import asyncio
 import datetime 
 
 from datetime import datetime       # DON'T get rid of this import, sends user format error
+from discord import Embed
 from discord import Member 
 from discord.ext.commands import Cog
 from discord.ext.commands import command
@@ -14,7 +15,21 @@ from typing import Optional
 class eventRemind(Cog):
     def __init__(self, bot):
         self.bot = bot
+    
+    @command(name="rogerHelp", aliases=["RogerHelp"])
+    async def rogerHelping(self, ctx):
+        embed = Embed(title="Hello I'm Roger, nice to meet you! Here are the commands I understand:", colour=0xC2FF33, timestamp=datetime.utcnow())
+        fields = [("$rogerHelp", "This message was sent with this command. \n", False),
+                  ("$rogerRemind", "This command DMs you reminders for messages you REPLIED to. \n ", False),
+                  ("$rogerFormat ", "This command helps you format reminders that you'll use with the '$rogerRemind' command \n", False),
+                  ("$rogerFormatEvent", "This command provides a template to detail information for an event. ", False)]
 
+        for name, value, inline in fields: 
+            embed.add_field(name=name, value=value, inline=inline)
+            
+        embed.set_author(name="Roger")
+        await ctx.send(embed=embed)
+        
     async def sendReminder(self, member: Member, *, message: str):
         await member.send(f"{message}")
         # print(f"Member: {member} Message: {message}")
@@ -71,8 +86,9 @@ class eventRemind(Cog):
         await ctx.send("$rogerRemind XX/XX/XXXX XX:XX AM/PM")
 
     @command(name="formatEvent", aliases=["formatevent", "FormatEvent", "rogerFormatEvent", "RogerFormatEvent", "rogerformatevent"])
-    async def rogerFormatEvent(self, ctx):
-        pass
+    async def rogerFormatEvent(self, ctx, *, message: str):
+        msg = "Event: n/a \n Date: XX/XX/XXXX \n Time: XX:XX AM/PM \n Cost: n/a \n Details: n/a"
+        ctx.send(msg)
 
     @Cog.listener()
     async def on_ready(self):

@@ -10,7 +10,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 
 PREFIX = "$"
-OWNER_IDS = [714338668671664218]
+OWNER_IDS = [714338668671664218] # 260226105867239434 ########################################CHANGE THIS
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")] # returns all cogs in the cogs directory
 
 class Ready(object): 
@@ -30,7 +30,6 @@ class Bot(BotBase):
     def __init__(self): 
         self.PREFIX = PREFIX
         self.guild = None
-        # self.scheduler = AsyncIOScheduler()
         self.ready = False
         self.cogs_ready = Ready()
 
@@ -87,19 +86,28 @@ class Bot(BotBase):
 
     async def on_ready(self):
         if not self.ready:
-           self.guild = self.get_guild(868204577567178753)    ########################## UPDATE
-           self.stdout = self.get_channel(868204577567178756) ########################## UPDATE
+           self.guild = self.get_guild(868204577567178753) # 267436776774303746   ########################## UPDATE
+           self.stdout = self.get_channel(868204577567178756) # 745811765614608474 ########################## UPDATE
            
-           # self.scheduler.start()
-
            while not self.cogs_ready.all_ready(): # bot won't be ready until all cogs are ready 
                await sleep(0.5)
 
            self.ready = True
            print("bot is ready")
-
-           await self.stdout.send("Now online!") 
+           # await self.stdout.send("Now online!") 
            
+           embed = Embed(title="Hello I'm Roger, nice to meet you! I'm here to help you remember events. Here are the commands I understand:", colour=0x33FFA7, timestamp=datetime.utcnow())
+           fields = [("$rogerHelp", "This command will send a list of commands. \n", False),
+                  ("$rogerRemind", "This command DMs you reminders for messages you REPLIED to. \n ", False),
+                  ("$rogerFormat ", "This command helps you format reminders that you'll use with the '$rogerRemind' command \n", False),
+                  ("$rogerFormatEvent", "This command provides a template to detail information for an event. ", False)]
+
+           for name, value, inline in fields: 
+                embed.add_field(name=name, value=value, inline=inline)
+            
+           embed.set_author(name="Roger")
+           await self.stdout.send(embed=embed)
+
         else:
             print("bot reconnected") 
 
