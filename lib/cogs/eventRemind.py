@@ -87,7 +87,7 @@ class eventRemind(Cog):
     async def rogerFormat(self, ctx): 
         await ctx.send("$rogerRemind MM/DD/YYYY HH:MM AM/PM")
 
-    @command(name="rogerEventFormat", aliases=["formatEvent", "formatevent"])
+    @command(name="rogerFormatEvent", aliases=["formatEvent", "formatevent", "rogerEventFormat"])
     async def rogerEventFormat(self, ctx): 
         await ctx.send("Event: n/a \n Date: MM/DD/YYYY \n Time: HH:MM AM/PM \n Cost: n/a \n Details: n/a")
 
