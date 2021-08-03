@@ -12,5 +12,5 @@ Roger is a Discord bot who reminds users of certain events. To ask Roger to set 
 ### Notes
 Roger is not able to handle edited messages. If you ask Roger to remind you of a message, but in the meantime the message has been edited, Roger will remind you of the original message NOT the edited message. 
 
-### Credits
+## Credits
 Thanks to Carberra Tutorials I was able to get the general setup of my bot. Here's his GitHub https://github.com/Carberra/updated-discord.py-tutorial and his YouTube channel https://www.youtube.com/channel/UC13cYu7lec-oOcqQf5L-brg. 
