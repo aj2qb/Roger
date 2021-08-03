@@ -56,8 +56,11 @@ class eventRemind(Cog):
 
         # Ensures date and time is properly formatted 
         try: 
-            notify = datetime.datetime(int(dateList[2]), int(dateList[0]), int(dateList[1]), 
+            notify = datetime(int(dateList[2]), int(dateList[0]), int(dateList[1]), 
                                          int(timeList[0]),  int(timeList[1]), 0)
+            if(notify < datetime.now()):
+                await ctx.send(f"I cannot send you a reminder for a past event.")
+                return 
         except: 
             await ctx.send(f"{ctx.author.mention} Format error. Please ensure: \n 1. All needed information is given \n 2. Valid date & time is given \n You can use '$rogerFormat' for help.")
             return  
@@ -76,19 +79,20 @@ class eventRemind(Cog):
         scheduleMessage.start()
 
     @rogerRemind.error
-    async def roger_Remind_Error(self, ctx, exc): 
+    async def roger_remind_error(self, ctx, exc): 
         if(isinstance(exc, UserInputError)): 
-            await ctx.send(f"{ctx.author.mention} Format error. AM/PM not specified. You can use '$rogerFormat' for help.")
-
+            await ctx.send(f"{ctx.author.mention} format error. You can use '$rogerformat' for help.")
 
     @command(name="rogerFormat", aliases=["format", "Format", "RogerFormat", "rogerformat"])
     async def rogerFormat(self, ctx): 
         await ctx.send("$rogerRemind MM/DD/YYYY HH:MM AM/PM")
 
-    @command(name="formatEvent", aliases=["formatevent", "FormatEvent", "rogerFormatEvent", "RogerFormatEvent", "rogerformatevent"])
-    async def rogerFormatEvent(self, ctx, *, message: str):
-        msg = "Event: n/a \n Date: MM/DD/YYYY \n Time: HH:MM AM/PM \n Cost: n/a \n Details: n/a"
-        ctx.send(msg)
+    @command(name="rogerEventFormat", aliases=["formatEvent", "formatevent"])
+    async def rogerEventFormat(self, ctx): 
+        await ctx.send("Event: n/a \n Date: MM/DD/YYYY \n Time: HH:MM AM/PM \n Cost: n/a \n Details: n/a")
+
+
+
 
     @Cog.listener()
     async def on_ready(self):
