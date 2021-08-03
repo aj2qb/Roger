@@ -74,7 +74,6 @@ class Bot(BotBase):
 
     async def on_command_error(self, ctx, exc): 
         if isinstance(exc, CommandNotFound):
-            print("command not found")
             pass
         elif isinstance(exc, BadArgument): 
             pass
