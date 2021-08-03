@@ -83,11 +83,11 @@ class eventRemind(Cog):
 
     @command(name="rogerFormat", aliases=["format", "Format", "RogerFormat", "rogerformat"])
     async def rogerFormat(self, ctx): 
-        await ctx.send("$rogerRemind XX/XX/XXXX XX:XX AM/PM")
+        await ctx.send("$rogerRemind MM/DD/YYYY HH:MM AM/PM")
 
     @command(name="formatEvent", aliases=["formatevent", "FormatEvent", "rogerFormatEvent", "RogerFormatEvent", "rogerformatevent"])
     async def rogerFormatEvent(self, ctx, *, message: str):
-        msg = "Event: n/a \n Date: XX/XX/XXXX \n Time: XX:XX AM/PM \n Cost: n/a \n Details: n/a"
+        msg = "Event: n/a \n Date: MM/DD/YYYY \n Time: HH:MM AM/PM \n Cost: n/a \n Details: n/a"
         ctx.send(msg)
 
     @Cog.listener()
