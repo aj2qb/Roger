@@ -2,7 +2,7 @@
 import asyncio
 import datetime 
 
-from datetime import datetime       # DON'T get rid of this import, sends user format error
+from datetime import datetime     
 from discord import Embed
 from discord import Member 
 from discord.ext.commands import Cog
@@ -10,7 +10,9 @@ from discord.ext.commands import command
 from discord.ext.commands import UserInputError
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
+from pytz import timezone
 from typing import Optional 
+
 
 class eventRemind(Cog):
     def __init__(self, bot):
@@ -56,11 +58,16 @@ class eventRemind(Cog):
 
         # Ensures date and time is properly formatted 
         try: 
+
             notify = datetime(int(dateList[2]), int(dateList[0]), int(dateList[1]), 
-                                         int(timeList[0]),  int(timeList[1]), 0)
-            if(notify < datetime.now()):
+                                            int(timeList[0]),  int(timeList[1]), 0)
+            tz = timezone('US/Eastern')
+            notifyNew = tz.localize(notify)
+            tooLate = datetime.now(tz)
+            if(notifyNew < tooLate):
                 await ctx.send(f"I cannot send you a reminder for a past event.")
-                return 
+                return   
+            
         except: 
             await ctx.send(f"{ctx.author.mention} Format error. Please ensure: \n 1. All needed information is given \n 2. Valid date & time is given \n You can use '$rogerFormat' for help.")
             return  
@@ -90,8 +97,6 @@ class eventRemind(Cog):
     @command(name="rogerFormatEvent", aliases=["formatEvent", "formatevent", "rogerEventFormat"])
     async def rogerEventFormat(self, ctx): 
         await ctx.send("Event: n/a \n Date: MM/DD/YYYY \n Time: HH:MM AM/PM \n Cost: n/a \n Details: n/a")
-
-
 
 
     @Cog.listener()
