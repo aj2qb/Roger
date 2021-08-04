@@ -60,7 +60,7 @@ class eventRemind(Cog):
         try: 
 
             notify = datetime(int(dateList[2]), int(dateList[0]), int(dateList[1]), 
-                                            int(timeList[0]),  int(timeList[1]), 0)
+                                            int(timeList[0]),  int(timeList[1]) + 1, 0)
             tz = timezone('US/Eastern')
             notifyNew = tz.localize(notify)
             tooLate = datetime.now(tz)
@@ -82,7 +82,7 @@ class eventRemind(Cog):
           
         # print(f"Remind me when it is: {notify}")
         scheduleMessage = AsyncIOScheduler()
-        scheduleMessage.add_job(eventRemind.sendReminder, "date", args=[self, ctx.author], kwargs={"message":f"{realMsg}"}, run_date=notify)
+        scheduleMessage.add_job(eventRemind.sendReminder, "date", args=[self, ctx.author], kwargs={"message":f"{realMsg}"}, run_date=notifyNew)
         scheduleMessage.start()
 
     @rogerRemind.error

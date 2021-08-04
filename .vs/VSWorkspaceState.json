@@ -5,6 +5,6 @@
     "\\lib\\bot",
     "\\lib\\cogs"
   ],
-  "SelectedNode": "\\launcher.py",
+  "SelectedNode": "\\lib\\cogs\\eventRemind.py",
   "PreviewInSolutionExplorer": false
 }
