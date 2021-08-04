@@ -10,7 +10,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 
 PREFIX = "$"
-OWNER_IDS = [714338668671664218] # 260226105867239434 ########################################CHANGE THIS
+OWNER_IDS = [] ######################################## ADD OWNER ID
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")] # returns all cogs in the cogs directory
 print(COGS)
 class Ready(object): 
@@ -86,8 +86,8 @@ class Bot(BotBase):
 
     async def on_ready(self):
         if not self.ready:
-           self.guild = self.get_guild(868204577567178753) # 267436776774303746   ########################## UPDATE
-           self.stdout = self.get_channel(868204577567178756) # 745811765614608474 ########################## UPDATE
+           self.guild = self.get_guild() ########################## ADD GUILD ID
+           self.stdout = self.get_channel()  ########################## ADD CHANNEL ID
            
            while not self.cogs_ready.all_ready(): # bot won't be ready until all cogs are ready 
                await sleep(0.5)
