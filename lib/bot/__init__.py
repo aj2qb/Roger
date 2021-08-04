@@ -12,7 +12,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 PREFIX = "$"
 OWNER_IDS = [] ######################################## ADD OWNER ID
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")] # returns all cogs in the cogs directory
-print(COGS)
+
 class Ready(object): 
     def __init__(self): 
         for cog in COGS:
