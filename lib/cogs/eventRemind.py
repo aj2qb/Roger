@@ -60,7 +60,7 @@ class eventRemind(Cog):
         try: 
 
             notify = datetime(int(dateList[2]), int(dateList[0]), int(dateList[1]), 
-                                            int(timeList[0]),  int(timeList[1]) + 1, 0)
+                                            int(timeList[0]),  int(timeList[1]), 59)
             tz = timezone('US/Eastern')
             notifyNew = tz.localize(notify)
             tooLate = datetime.now(tz)
