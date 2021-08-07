@@ -41,7 +41,7 @@ class Bot(BotBase):
 
     def setup(self):    # this method is what makes the fun cog work
         for cog in COGS:
-            self.load_extension(f'lib.cogs.{cog}') # load_extension makes cog work by accessing the setup(bot) method in fun.py
+            self.load_extension(f'lib.cogs.{cog}') # load_extension makes cog work by accessing the setup(bot) method in eventRemind.py
             print(f'{cog} cog loaded')
 
         print("Setup complete.")
